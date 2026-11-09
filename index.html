@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0b1026" />
+<title>🎂 Birthday Page — Cache Setup (2 minutes)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet" />
+<style>
+:root {
+	--bg-0: #070b1e;
+	--bg-1: #0b1026;
+	--blue: #2b58ff;
+	--blue-deep: #1e3fdb;
+	--gold: #ffc94d;
+	--gold-2: #ffb020;
+	--rose: #ff6f91;
+	--magenta: #b465ff;
+	--ink: #fff9f0;
+	--ink-dim: rgba(255, 249, 240, 0.8);
+	--card: rgba(255, 255, 255, 0.055);
+	--card-border: rgba(255, 255, 255, 0.12);
+	--font-display: "Fraunces", Georgia, serif;
+	--font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+	min-height: 100vh;
+	background:
+		radial-gradient(1200px 800px at 85% -10%, rgba(43, 88, 255, 0.35), transparent 60%),
+		radial-gradient(900px 700px at -10% 30%, rgba(180, 101, 255, 0.18), transparent 55%),
+		radial-gradient(1000px 900px at 50% 110%, rgba(255, 176, 32, 0.14), transparent 60%),
+		linear-gradient(180deg, var(--bg-1) 0%, var(--bg-0) 100%);
+	color: var(--ink);
+	font-family: var(--font-body);
+	font-size: 16.5px;
+	line-height: 1.65;
+	-webkit-font-smoothing: antialiased;
+	overflow-x: hidden;
+}
+.wrap { max-width: 860px; margin: 0 auto; padding: 56px 22px 90px; position: relative; z-index: 1; }
+.glow { position: fixed; border-radius: 50%; filter: blur(70px); opacity: .5; pointer-events: none; z-index: 0; }
+.g1 { width: 46vmax; height: 46vmax; left: -12vmax; top: -14vmax; background: radial-gradient(circle, rgba(43,88,255,.55), transparent 65%); }
+.g2 { width: 38vmax; height: 38vmax; right: -10vmax; bottom: -10vmax; background: radial-gradient(circle, rgba(255,176,32,.3), transparent 65%); }
+.balloon { position: fixed; width: 44px; height: 54px; border-radius: 50% 50% 50% 50% / 44% 44% 56% 56%; opacity: .35; pointer-events: none; z-index: 0; }
+.balloon::after { content: ""; position: absolute; left: 50%; bottom: -22px; width: 1.5px; height: 22px; background: rgba(255,249,240,.35); }
+.b1 { left: 7%; top: 18%; background: radial-gradient(circle at 32% 28%, #ffd27a, #ffb020 70%); animation: float 14s ease-in-out infinite; }
+.b2 { right: 8%; top: 40%; background: radial-gradient(circle at 32% 28%, #6f8cff, #2b58ff 70%); animation: float 17s ease-in-out infinite 3s; }
+.b3 { right: 15%; bottom: 14%; background: radial-gradient(circle at 32% 28%, #ff9bb1, #ff6f91 70%); animation: float 15s ease-in-out infinite 6s; }
+@keyframes float { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-22px) rotate(3deg); } }
+
+.eyebrow {
+	display: inline-flex; align-items: center; gap: 10px;
+	letter-spacing: .32em; text-transform: uppercase;
+	font-size: 12.5px; font-weight: 800; color: var(--gold);
+	margin-bottom: 18px;
+}
+h1 {
+	font-family: var(--font-display);
+	font-weight: 900;
+	font-size: clamp(2.2rem, 6vw, 3.6rem);
+	line-height: 1.1;
+	margin: 0 0 14px;
+	background-image: linear-gradient(100deg, #ffe9b0 0%, var(--gold) 30%, #fff6df 50%, var(--gold-2) 70%, #ffe9b0 100%);
+	background-size: 200% 100%;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+.head-center { text-align: center; margin-bottom: 42px; }
+.sub { color: var(--ink-dim); font-size: clamp(1rem, 2vw, 1.15rem); max-width: 620px; margin: 0 auto; }
+.sub strong { color: var(--ink); }
+
+.card {
+	background: var(--card);
+	border: 1px solid var(--card-border);
+	border-radius: 26px;
+	padding: clamp(26px, 4vw, 44px);
+	margin-bottom: 34px;
+	backdrop-filter: blur(14px);
+	-webkit-backdrop-filter: blur(14px);
+	box-shadow: 0 30px 80px rgba(3, 6, 20, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.card h2 {
+	font-family: var(--font-display);
+	font-weight: 700;
+	font-size: clamp(1.45rem, 3.4vw, 2rem);
+	margin: 0 0 16px;
+	display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.card h2 .badge {
+	display: inline-grid; place-items: center;
+	width: 44px; height: 44px; border-radius: 50%; flex: 0 0 auto;
+	font-family: var(--font-body); font-weight: 800; font-size: 20px; color: #3a2503;
+	background: linear-gradient(135deg, var(--gold-2), var(--gold));
+	box-shadow: 0 10px 26px rgba(255, 176, 32, .35);
+}
+.card p { color: var(--ink-dim); margin: 0 0 14px; }
+.card p strong, .card li strong { color: var(--ink); }
+ol.steps { list-style: none; margin: 18px 0 6px; padding: 0; counter-reset: step; }
+ol.steps li {
+	counter-increment: step;
+	position: relative;
+	padding: 12px 14px 12px 62px;
+	margin-bottom: 10px;
+	color: var(--ink-dim);
+}
+ol.steps li strong { color: var(--ink); }
+ol.steps li::before {
+	content: counter(step);
+	position: absolute; left: 8px; top: 12px;
+	width: 34px; height: 34px; border-radius: 50%;
+	display: grid; place-items: center;
+	font-weight: 800; font-size: 15px; color: #fff;
+	background: linear-gradient(135deg, var(--blue-deep), var(--blue));
+	box-shadow: 0 6px 16px rgba(43, 88, 255, .4);
+}
+.code-box {
+	display: flex; align-items: center; gap: 12px;
+	background: rgba(3, 6, 20, 0.55);
+	border: 1.5px dashed rgba(255, 201, 77, 0.55);
+	border-radius: 16px;
+	padding: 14px 16px;
+	margin: 16px 0 8px;
+	flex-wrap: wrap;
+}
+.code-box code {
+	font-family: "SF Mono", Menlo, Consolas, monospace;
+	font-size: 19px; font-weight: 700; letter-spacing: .02em;
+	color: var(--gold);
+	flex: 1 1 auto;
+	white-space: nowrap;
+}
+.copy-btn {
+	-webkit-appearance: none; appearance: none;
+	border: 0; cursor: pointer;
+	display: inline-flex; align-items: center; gap: 8px;
+	padding: 10px 18px; border-radius: 999px;
+	font-family: var(--font-body); font-weight: 800; font-size: 13.5px;
+	color: #3a2503;
+	background: linear-gradient(135deg, var(--gold-2), var(--gold));
+	box-shadow: 0 8px 20px rgba(255, 176, 32, .3);
+	transition: transform .2s ease, box-shadow .2s ease;
+}
+.copy-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(255, 176, 32, .45); }
+.copy-btn:active { transform: scale(.96); }
+.copy-btn.copied { background: linear-gradient(135deg, #17a854, #3ecf7a); color: #fff; }
+.note {
+	font-size: 13.5px;
+	color: var(--ink-dim);
+	margin: 6px 0 0;
+}
+.alt-box {
+	border-left: 3px solid var(--magenta);
+	background: rgba(180, 101, 255, 0.08);
+	border-radius: 0 14px 14px 0;
+	padding: 14px 18px;
+	margin-top: 18px;
+}
+.alt-box h3 { margin: 0 0 8px; font-size: 15px; font-weight: 800; color: #d9b8ff; letter-spacing: .04em; }
+.alt-box p, .alt-box li { color: var(--ink-dim); font-size: 14.5px; }
+.alt-box code { color: var(--gold); background: rgba(3,6,20,.5); padding: 2px 8px; border-radius: 6px; font-size: 13.5px; }
+.test-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 18px 0 6px; }
+.test {
+	background: rgba(3, 6, 20, 0.45);
+	border: 1px solid var(--card-border);
+	border-radius: 16px;
+	padding: 16px 18px;
+}
+.test .label { font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+.test .label.gold { color: var(--gold); }
+.test .name { font-family: var(--font-display); font-weight: 800; font-size: 26px; }
+.test .url { font-size: 12.5px; color: var(--ink-dim); margin-top: 6px; word-break: break-all; }
+.verdict { margin-top: 16px; padding: 14px 18px; border-radius: 14px; font-weight: 700; font-size: 15px; }
+.verdict.yes { background: rgba(23, 168, 84, 0.15); border: 1px solid rgba(62, 207, 122, 0.5); color: #7ce8a9; }
+.verdict.no { background: rgba(255, 111, 145, 0.12); border: 1px solid rgba(255, 111, 145, 0.45); color: #ffb3c4; }
+.done {
+	text-align: center;
+	font-family: var(--font-display);
+	font-size: clamp(1.3rem, 3vw, 1.8rem);
+	font-weight: 800;
+	color: var(--gold);
+	margin: 10px 0 26px;
+}
+.footer { text-align: center; color: var(--ink-dim); font-size: 13.5px; margin-top: 8px; }
+.footer strong { color: var(--ink); }
+.tick { color: #3ecf7a; font-weight: 800; }
+@media (max-width: 640px) {
+	.test-grid { grid-template-columns: 1fr; }
+	.wrap { padding: 40px 16px 70px; }
+	.balloon { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.balloon { animation: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="glow g1"></div>
+<div class="glow g2"></div>
+<span class="balloon b1"></span>
+<span class="balloon b2"></span>
+<span class="balloon b3"></span>
+
+<div class="wrap">
+	<div class="head-center">
+		<p class="eyebrow"><span aria-hidden="true">✦</span> Birthday Page · Quick Setup <span aria-hidden="true">✦</span></p>
+		<h1>One small step in Rocket.net 🎈</h1>
+		<p class="sub">The birthday page is <strong>live</strong> and shows a <strong>personal name for every visitor</strong>. Your server cache must <strong>skip this one page</strong> — otherwise the cache saves the first visitor's name and everyone sees the same one. It takes about <strong>2 minutes</strong>.</p>
+	</div>
+
+	<div class="card">
+		<h2><span class="badge">1</span> The page is live — take a look</h2>
+		<p>Open this link and change the name at the end of the URL to see it update instantly:</p>
+		<div class="code-box"><code>yourwebsitecouldtalk.com/birthday/?name=Sarah</code></div>
+		<p class="note">Every section is already working — the Talking Orb, the call button, the video and the affiliate button. Only this cache setting remains. 🎉</p>
+	</div>
+
+	<div class="card">
+		<h2><span class="badge">2</span> Why the cache must skip this page</h2>
+		<p>The personal name is added <strong>when the page loads</strong>, separately for every visitor. If your server cache saves the finished page, the <strong>first visitor's name gets frozen</strong> for everyone who opens it after them.</p>
+		<p>Excluding this single page costs nothing — images, styles and scripts stay cached exactly as before.</p>
+	</div>
+
+	<div class="card">
+		<h2><span class="badge">3</span> Add the exclusion in Rocket.net</h2>
+		<ol class="steps">
+			<li>Log in to <strong>my.rocket.net</strong> (your hosting dashboard).</li>
+			<li>Open the site <strong>yourwebsitecouldtalk.com</strong>.</li>
+			<li>Go to the <strong>Rocket CDN</strong> / <strong>Cache</strong> section.</li>
+			<li>Find <strong>Cache Exclusions</strong> (sometimes called <strong>“Never cache URLs”</strong> or <strong>“Bypass Cache”</strong>).</li>
+			<li>Add the line below and <strong>save</strong>.</li>
+			<li>Click <strong>Purge Cache</strong> once.</li>
+		</ol>
+		<div class="code-box">
+			<code id="exclusion-line">/birthday*</code>
+			<button class="copy-btn" id="copy-btn" type="button">📋 Copy line</button>
+		</div>
+		<p class="note">The star at the end covers the page plus every version of it (<code>?name=Sarah</code>, <code>?name=John</code>, ad tracking parameters — all of them).</p>
+		<div class="alt-box">
+			<h3>IF YOU MANAGE CLOUDFLARE DIRECTLY — OPTIONAL</h3>
+			<p>Add one Page Rule in the Cloudflare dashboard:</p>
+			<p><code>*yourwebsitecouldtalk.com/birthday*</code> → <strong>Cache Level: Bypass</strong> → Save and Deploy.</p>
+		</div>
+	</div>
+
+	<div class="card">
+		<h2><span class="badge">4</span> The 2-minute test</h2>
+		<p>Open these two links in <strong>two separate incognito windows</strong>:</p>
+		<div class="test-grid">
+			<div class="test">
+				<div class="label">Window 1 — should show</div>
+				<div class="name">Alpha</div>
+				<div class="url">/birthday/?name=Alpha</div>
+			</div>
+			<div class="test">
+				<div class="label gold">Window 2 — should show</div>
+				<div class="name">Beta</div>
+				<div class="url">/birthday/?name=Beta</div>
+			</div>
+		</div>
+		<div class="verdict yes">✅ Window 2 shows “Beta” → everything is working. All done!</div>
+		<div class="verdict no">❌ Window 2 shows “Alpha” → the exclusion has not been saved yet. Repeat step 3 and purge again.</div>
+	</div>
+
+	<div class="card">
+		<h2><span class="badge">5</span> Ready-to-share birthday links</h2>
+		<p>Once the test passes, share birthday links like these:</p>
+		<div class="code-box"><code>yourwebsitecouldtalk.com/birthday/?name=Your-Name-Here</code></div>
+		<p class="note">Hyphens between words become spaces on the page, so <code>?name=Happy-Birthday-Sarah</code> displays “Happy Birthday Sarah”. The page works beautifully on phones too — perfect for WhatsApp birthday messages. 🎈</p>
+	</div>
+
+	<p class="done">That's it — after the test passes, everything is complete! 🎉</p>
+	<p class="footer"><strong>Made with 🎈 by Growth Studio</strong> — the talking website people.</p>
+</div>
+
+<script>
+(function () {
+	var btn = document.getElementById('copy-btn');
+	var line = document.getElementById('exclusion-line');
+	if (!btn || !line) return;
+	btn.addEventListener('click', function () {
+		var text = line.textContent.trim();
+		function done() {
+			btn.classList.add('copied');
+			btn.textContent = '✓ Copied!';
+			window.setTimeout(function () {
+				btn.classList.remove('copied');
+				btn.textContent = '📋 Copy line';
+			}, 2200);
+		}
+		if (navigator.clipboard && navigator.clipboard.writeText) {
+			navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+		} else { fallback(); }
+		function fallback() {
+			var ta = document.createElement('textarea');
+			ta.value = text;
+			ta.style.position = 'fixed';
+			ta.style.opacity = '0';
+			document.body.appendChild(ta);
+			ta.select();
+			try { document.execCommand('copy'); done(); } catch (e) {}
+			ta.remove();
+		}
+	});
+})();
+</script>
+</body>
+</html>
